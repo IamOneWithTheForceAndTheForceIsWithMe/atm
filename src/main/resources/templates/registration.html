@@ -1,0 +1,68 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"-->
+<!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">-->
+<!--<head>-->
+<!--    <title>Create new account</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form method="POST" th:action="@{/registration}" th:object="${UserForm}">-->
+<!--    <div th:if="${#fields.hasErrors()}">-->
+<!--        <span class="validation_error">Please, correct the registration form</span>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="username"> User Name : <input type="text" th:field="*{username}"/></label>-->
+<!--        <span class="validation_error"-->
+<!--              th:if="${fields.hasErrors('username')}"-->
+<!--              th:errors="*{username}">Username error</span>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="password"> Password: <input type="password" th:field="*{password}"/></label>-->
+<!--        <span class="validation_error"-->
+<!--              th:if="${fields.hasErrors('password')}"-->
+<!--              th:errors="*{password}">Password error</span>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <input type="submit" value="Sign Up"/>-->
+<!--    </div>-->
+<!--    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>-->
+<!--</form>-->
+<!--<div>-->
+<!--    <a href="/login">Already have an account?</a>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Create new account</title>
+</head>
+<body>
+<form method="POST" th:action="@{/registration}">
+    <div>
+        <label> User Name : <input type="text" name="username"/></label>
+    </div>
+    <div>
+        <label> Password: <input type="password" name="password"/></label>
+    </div>
+    <div>
+        <label> Credit card number: <input type="text" name="ccNumber"></label>
+    </div>
+    <div>
+        <label> Expiration date: <input type="text" name="ccExpiration"></label>
+    </div>
+    <div>
+        <label> CVV: <input type="text" name="ccCVV"></label>
+    </div>
+    <div>
+        <input type="submit" value="Sign Up"/>
+    </div>
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+</form>
+<div>
+    <a href="/login">Already have an account?</a>
+</div>
+</body>
+</html>

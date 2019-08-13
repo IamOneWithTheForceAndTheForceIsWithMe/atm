@@ -1,5 +1,6 @@
 package com.yuriikoval1997.atm;
 
+import com.yuriikoval1997.atm.pojoes.Account;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
