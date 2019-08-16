@@ -1,9 +1,9 @@
 package com.yuriikoval1997.atm.controllers;
 
-import com.yuriikoval1997.atm.pojoes.Account;
-import com.yuriikoval1997.atm.pojoes.UserForm;
-import com.yuriikoval1997.atm.repositories.AccountRepo;
+import com.yuriikoval1997.atm.pojoes.RegistrationForm;
+import com.yuriikoval1997.atm.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +16,14 @@ import javax.validation.Valid;
 @RequestMapping("/registration")
 public class RegistrationController {
 
+    private PasswordEncoder passwordEncoder;
+    private UserRepo userRepo;
+
     @Autowired
-    private AccountRepo accountRepo;
+    public RegistrationController(PasswordEncoder passwordEncoder, UserRepo userRepo) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepo = userRepo;
+    }
 
     @GetMapping
     public String showRegistrationForm(){
@@ -25,15 +31,11 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processUserForm(@Valid UserForm userForm, Errors errors){
+    public String processUserForm(@Valid RegistrationForm registrationForm, Errors errors){
         if (errors.hasErrors()){
             return "registration";
         }
-        Account account = accountRepo.findUserByUsername(userForm.getUsername());
-        if (account != null){
-            return "registration";
-        }
-        accountRepo.createAccount(userForm);
-        return "registration:/accounts";
+        userRepo.register(registrationForm.toUser(passwordEncoder));
+        return "registration:/login";
     }
 }
